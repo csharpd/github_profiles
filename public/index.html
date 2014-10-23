@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Github Importer</title>
+		<link href='css/github.css' rel="stylesheet">
+	</head>
+	<body>
+		<section>
+			<input type="text" id="profile-name" placeholder="Who are you looking for?">
+			<a href='#' id='fetch-github-profile'>Fetch</a>
+		</section>
+		<article>
+			<header>
+				<img>
+				<h1></h1>
+				<h2></h2>
+			</header>
+			<p>
+				<strong id="followers">Followers:</strong>
+				<strong id="public-repos">Public Repos:</strong>
+			</p>
+		</article>
+		<script type="text/javascript" src="javascript/vendor/jquery.js"></script>
+		<script type="text/javascript" src="javascript/vendor/handlebars.js"></script></script>
+		<script type='text/javascript'>
+			$('#fetch-github-profile').on('click',function(){
+				// saves the input
+				var profile_name = $('#profile-name').val();
+				$.get("https://api.github.com/users/" + profile_name, function(data) {
+						console.log(data);
+				});
+			});
+		</script>
+	</body>
+</html>
