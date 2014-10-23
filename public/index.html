@@ -9,7 +9,7 @@
 				<input type="text" id="profile-name" placeholder="Who are you looking for?">
 				<a href='#' id='fetch-github-profile'>Fetch</a>
 			</section>
-<!-- 			This is where the template is appended to each time
+<!-- 			The section below is where the template is appended to each time the api is called using a new user name
  -->	<section id="profiles">
 			</section>
 		</main>
@@ -30,14 +30,17 @@
 		<script type="text/javascript" src="javascript/vendor/handlebars.js"></script></script>
 		<script type='text/javascript'>
 			$('#fetch-github-profile').on('click',function(){
-				// saves the input
+				// line below saves the user input in to a variable
 				var profile_name = $('#profile-name').val();
-				// calls the user data from the github api
+				// line below saves the html within the profileTemplate section into a variable called source
 				var source = $('#profileTemplate').html();
+				//line below enables handlebars to compile the html saved in the source variable
 				var template = Handlebars.compile(source);
+				// line below calls the user data from the github api
 				$.get("https://api.github.com/users/" + profile_name, function(githubProfile) {
+					// line below feeds allows the template to access the data the comes back from the call to the github api and then appends that template to the #profiles section.
 						$('#profiles').append(template(githubProfile));
-						// appends the image to article header - don't like. Not v clean
+						// line below appends the image to article header - don't like. Not v clean
 						// $('article header').append('<img src="'+data['avatar_url']+'"/>')
 						//an alternative is below but templating is better!
 						// $('article header img').attr('src', data.avatar_url);
@@ -46,3 +49,4 @@
 		</script>
 	</body>
 </html>
+
